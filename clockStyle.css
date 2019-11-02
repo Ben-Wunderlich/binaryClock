@@ -1,0 +1,19 @@
+
+
+#times{
+    text-align: center;
+    position: relative;
+    width:100%;
+    top: 20%;
+}
+
+span{
+    padding: 10px;
+}
+
+
+html{
+    background-color: #08041c;
+    color: whitesmoke;
+    font-size: 50px;
+}
