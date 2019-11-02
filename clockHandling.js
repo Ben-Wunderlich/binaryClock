@@ -6,8 +6,8 @@ function updateClock(){
     mins=toBin(mins);secs=toBin(secs);
     var years = toBin(now.getFullYear());
 
-    $("#secs").text(prependZeros(secs, 4));
-    $("#mins").text(prependZeros(mins, 3));
+    $("#secs").text(prependZeros(secs, 3));
+    $("#mins").text(prependZeros(mins, 4));
     $("#hours").text(prependZeros(hours,5));
     $("#days").text(prependZeros(days, 9))
     $("#years").text(years);
@@ -32,7 +32,7 @@ function weirdTime(now){
     var yearSecs=secondsThisYear(now);
     var [days, dayScraps] = div(yearSecs, 3456);
     var [hours, hourScraps] = div(dayScraps, 128);
-    var [mins, secs] = div(hourScraps, 16);
+    var [mins, secs] = div(hourScraps, 8);
     return [days, hours, mins, secs];
 }
 
