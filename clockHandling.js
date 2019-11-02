@@ -1,12 +1,17 @@
 
 function updateClock(){
     var now = new Date();
-    var secs = toBin(weirdSecs(now));
-    var mins = toBin(weirdMins(now));
-    var hours = toBin(now.getHours());
-    $("#secs").text(prependZeros(secs, 6));
-    $("#mins").text(prependZeros(mins, 6));
+    var [days, hours, mins, secs] = weirdTime(now);
+    days = toBin(days);hours=toBin(hours);
+    mins=toBin(mins);secs=toBin(secs);
+    var years = toBin(now.getFullYear());
+
+    $("#secs").text(prependZeros(secs, 4));
+    $("#mins").text(prependZeros(mins, 3));
     $("#hours").text(prependZeros(hours,5));
+    $("#days").text(prependZeros(days, 9))
+    $("#years").text(years);
+
 
 }
 
@@ -15,20 +20,29 @@ function prependZeros(str, digits){
     return "0".repeat(zerosToAdd) + str;
 }
 
-//64 seconds in a minute
-function weirdSecs(now){
-    var normSecs = secondsThisHour(now);
-    return normSecs % 64;
-}
-
-function secondsThisHour(now){
+function secondsThisYear(now){
+    var days = now.getDay();
+    var hours = now.getHours();
     var mins = now.getMinutes();
     var secs = now.getSeconds();
-    return (mins*60)+secs
+    return (days*86400)+(hours*3600)+(mins*60)+secs
 }
 
-function weirdMins(now){
-    return Math.floor(secondsThisHour(now)/64);
+function weirdTime(now){
+    var yearSecs=secondsThisYear(now);
+    var [days, dayScraps] = div(yearSecs, 3456);
+    var [hours, hourScraps] = div(dayScraps, 128);
+    var [mins, secs] = div(hourScraps, 16);
+    return [days, hours, mins, secs];
+}
+
+function div(num, divisor){
+    var dividend=0;
+    while (num >= divisor){
+        dividend++;
+        num-=divisor;
+    }
+    return [dividend, num]
 }
 
 function toBin(num){
