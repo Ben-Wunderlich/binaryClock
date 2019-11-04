@@ -3,19 +3,18 @@
 #times{
     text-align: center;
     position: relative;
-    height: 100%;
+    height: min-content;
     top: 0%;
     writing-mode: vertical-lr;
     text-orientation: upright;
+    font-size: 50px;
 }
 
-span{
+.aTime{
     padding: 10px;
 }
-
 
 html{
     background-color: #08041c;
     color: whitesmoke;
-    font-size: 50px;
 }

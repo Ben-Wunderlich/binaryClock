@@ -6,3 +6,6 @@ for i in range(1,10):
     sum*=x
     x/=2
   print(i,sum)
+
+#2^0 * 2^1 * 2^2
+#    / 2^
