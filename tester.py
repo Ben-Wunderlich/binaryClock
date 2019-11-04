@@ -1,9 +1,8 @@
-x=1545264000
-y=2
-z=0
-while z< y:
-  z+= (x//y)
-  y*=2
-  print(y)
-  #  x=1545264000
-print(y)
+
+for i in range(1,10):
+  x=2**i
+  sum=1
+  while x > 1:
+    sum*=x
+    x/=2
+  print(i,sum)

@@ -3,19 +3,9 @@ function updateClock(){
     var now = new Date()
     var timeArr = weirdTime(now);
 
-    timeArr.forEach(function(element) {
-        console.log(element);
-    });
-    /*days = toBin(days);hours=toBin(hours);
-    mins=toBin(mins);secs=toBin(secs);
-
-    $("#secs").text(prependZeros(secs, 3));
-    $("#mins").text(prependZeros(mins, 4));
-    $("#hours").text(prependZeros(hours,5));
-    $("#days").text(prependZeros(days, 9))
-    $("#years").text(years);*/
-
-
+    for(i=0;i<timeArr.length;i++){
+        $("#"+i).text(timeArr[i]);
+    }
 }
 
 function prependZeros(str, digits){
@@ -47,12 +37,11 @@ function powa(num){
 
 function weirdTime(now){
     var allSecs = totalSeconds(now);
-    var currTime = 128
-    var tot=powerProduct(128);
+    var currTime = 256
+    var tot=powerProduct(currTime);
     var timeArr = [];
-    var min=1;
     var result;
-    while(currTime >= min){
+    while(currTime >= 1){
         result = div(allSecs, tot);
         timeArr.push(prependZeros(toBin(result[0]), powa(currTime)));
         allSecs = result[1];
@@ -60,7 +49,7 @@ function weirdTime(now){
         tot /= currTime;
         currTime /= 2;
     }
-    return timeArr;
+    return timeArr.reverse();
 }
 
 function div(num, divisor){
