@@ -24,16 +24,25 @@ function prependZeros(str, digits){
 }
 
 function totalSeconds(now){
-    return now.getTime()/1000;
+    return Math.floor(now.getTime()/1000);
 }
 
 function powerProduct(num){
-    num/=2
-    var total = 0;
-    while(num>=2){
+    var total = 1;
+    while(num>=1){
         total*=num
         num/=2
     }
+    return total;
+}
+
+function powa(num){
+    i=0
+    while(num >=1){
+        i++;
+        num/=2;
+    }
+    return i;
 }
 
 function weirdTime(now){
@@ -41,22 +50,17 @@ function weirdTime(now){
     var currTime = 128
     var tot=powerProduct(128);
     var timeArr = [];
-    var min=2;
+    var min=1;
     var result;
     while(currTime >= min){
         result = div(allSecs, tot);
-        tot/=currTime;
-        timeArr.push(toBin(result[1]));
-        allSecs = result[0];
-        currTime/=2;
+        timeArr.push(prependZeros(toBin(result[0]), powa(currTime)));
+        allSecs = result[1];
+
+        tot /= currTime;
+        currTime /= 2;
     }
     return timeArr;
-
-    var yearSecs=totalSeconds(now);
-    var [days, dayScraps] = div(yearSecs, 3456);
-    var [hours, hourScraps] = div(dayScraps, 128);
-    var [mins, secs] = div(hourScraps, 8);
-    return [days, hours, mins, secs];
 }
 
 function div(num, divisor){
