@@ -1,8 +1,4 @@
-
 function updateClock(){
-    if(!shouldUpdate()){
-        return;
-    }
     updateTillElement();
     var now = new Date()
     var timeArr = weirdTime(now);
@@ -10,10 +6,6 @@ function updateClock(){
     for(i=0;i<timeArr.length;i++){
         $("#"+i).text(timeArr[i]);
     }
-}
-
-function shouldUpdate(){
-    return $("#keepUpdating").prop("checked");
 }
 
 function prependZeros(str, digits){
@@ -102,7 +94,6 @@ function secondToNatural(secs){
 }
 
 function updateTime(el){
-    if(!shouldUpdate()){return;}
     var contents = $(el).text();
     var len = contents.length;
     var max = maxTime(len)
@@ -120,25 +111,27 @@ function updateTillElement(){
 }
 
 function changeHighlight(el){
-    if(!$("#doHighlight").prop("checked")){
-        return;
-    }
     var className = "lastChecked";
     $(".aTime").removeClass(className);
     $(el).addClass(className);
-}
-
-function stopHighlighting(el){
-    if(!$(el).prop("checked")){
-        clearHighlight();
-    }
 }
 
 function clearHighlight(){
     $(".aTime").removeClass("lastChecked");
 }
 
+var baseMessage = "hover over an element to see how long till it resets";
+
+function resetTillMessage(){
+    $("#nextReset").text(baseMessage);
+}
+
 $(".aTime").mouseover(function() { 
     updateTime(this);
     changeHighlight(this);
 });
+
+$("#times").mouseleave(function(){
+    clearHighlight();
+    resetTillMessage();
+})
