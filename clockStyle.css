@@ -8,13 +8,41 @@
     writing-mode: vertical-lr;
     text-orientation: upright;
     font-size: 50px;
+    left:20px;
 }
 
 .aTime{
     padding: 10px;
 }
 
+.lastChecked{
+    background-color: #12093d;
+}
+
+
 html{
     background-color: #08041c;
     color: whitesmoke;
+}
+
+.checkBox{
+    margin: 5px;
+
+}
+
+input{
+    margin:20px;
+}
+
+button{
+    color: whitesmoke;
+    border-radius: 20%;
+    padding: 5px;
+    margin:20px;
+    background-color: #12093d;
+    border-color: rgb(87, 167, 6);
+}
+
+button:focus {
+    outline:0;
 }

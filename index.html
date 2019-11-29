@@ -9,9 +9,11 @@
     </head>
 
 <body onload="updateClock(); setInterval('updateClock()', 1000 )">
-
 <h2 id="nextReset">hover over an element to see how long till it resets</h2>
+<button type="button" onclick="clearHighlight();">clear selection</button>
 
+<span class="checkBox">update clock<input type="checkbox" id="keepUpdating" checked="true"></span>
+<span class="checkBox">highlight element<input type="checkbox" onclick="stopHighlighting(this)" id="doHighlight" checked="true"></span>
 <div id="times">
 
     <span><span>&#9203</span>
@@ -39,7 +41,8 @@
     <div id="7" class="aTime" title="resets around every 2000 years"></div></span>
 
     <span><span>&#10548</span>
-    <div id="8" class="aTime" title="hell will freeze over before this resets"></div></span>
+    <div id="8" class="aTime" title="hell will freeze over before this resets, the next column would take over 30 quadrillion years to reset"></div></span>
+    
 </div>
 
 <script src="clockHandling.js"></script>

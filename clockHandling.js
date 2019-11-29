@@ -1,11 +1,19 @@
 
 function updateClock(){
+    if(!shouldUpdate()){
+        return;
+    }
+    updateTillElement();
     var now = new Date()
     var timeArr = weirdTime(now);
 
     for(i=0;i<timeArr.length;i++){
         $("#"+i).text(timeArr[i]);
     }
+}
+
+function shouldUpdate(){
+    return $("#keepUpdating").prop("checked");
 }
 
 function prependZeros(str, digits){
@@ -26,6 +34,7 @@ function powerProduct(num){
     return total;
 }
 
+//is just log base 2, maybe
 function powa(num){
     i=0
     while(num >=1){
@@ -65,12 +74,13 @@ function toBin(num){
     return num.toString(2);
 }
 
+//might be faster way with a formula
 function maxTime(len){
-    var sum=1
+    var product=1
     for(i=0;i<= len; i++){
-        sum *= Math.pow(2,i);
+        product *= Math.pow(2,i);
     }
-    return sum;
+    return product;
 }
 
 function secondToNatural(secs){
@@ -92,6 +102,7 @@ function secondToNatural(secs){
 }
 
 function updateTime(el){
+    if(!shouldUpdate()){return;}
     var contents = $(el).text();
     var len = contents.length;
     var max = maxTime(len)
@@ -101,6 +112,33 @@ function updateTime(el){
     $("#nextReset").text("next reset for that element in "+secondToNatural(timeTill));
 }
 
+function updateTillElement(){
+    var el = $(".lastChecked").get()
+    if(el.length > 0){
+        updateTime(el[0])
+    }
+}
+
+function changeHighlight(el){
+    if(!$("#doHighlight").prop("checked")){
+        return;
+    }
+    var className = "lastChecked";
+    $(".aTime").removeClass(className);
+    $(el).addClass(className);
+}
+
+function stopHighlighting(el){
+    if(!$(el).prop("checked")){
+        clearHighlight();
+    }
+}
+
+function clearHighlight(){
+    $(".aTime").removeClass("lastChecked");
+}
+
 $(".aTime").mouseover(function() { 
     updateTime(this);
-}); 
+    changeHighlight(this);
+});
